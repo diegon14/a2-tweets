@@ -16,6 +16,7 @@ function parseTweets(runkeeper_tweets) {
 
 	displayDateRange(tweet_array, tweet_count);
 	displayTweetCategories(tweet_array, tweet_count);
+	displayUserWrittenTweets(tweet_array);
 }
 
 //Wait for the DOM to load
@@ -63,4 +64,21 @@ function displayTweetCategories(tweet_array, tweet_count) {
 		document.querySelector('.' + category.percentageClass).innerText =
 			math.format(tweet_array.length === 0 ? 0 : (category_count / tweet_count) * 100, 2) + '%';
 	});
+}
+
+function displayUserWrittenTweets(tweet_array) {
+	completed_event_tweet_array = tweet_array.filter(tweet => tweet.source === 'completed_event');
+
+	completed_event_user_written_test_array = completed_event_tweet_array.filter(
+		tweet => tweet.written);
+
+	completed_event_tweet_array_length = completed_event_tweet_array.length;
+	document.querySelectorAll('.completedEvents')[1].innerText = completed_event_tweet_array_length;
+
+	completed_event_user_written_test_array_length = completed_event_user_written_test_array.length
+	document.querySelector('.written').innerText = completed_event_user_written_test_array_length;
+
+	document.querySelector('.writtenPct').innerText =
+		math.format(completed_event_tweet_array_length === 0 ? 0 : (completed_event_user_written_test_array_length / completed_event_tweet_array_length) * 100, 2) + '%';
+
 }
