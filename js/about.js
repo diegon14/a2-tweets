@@ -57,7 +57,7 @@ function displayTweetCategories(tweet_array, tweet_count) {
 	];
 
 	categories.forEach(function(category) {
-		category_count = tweet_array.filter(tweet => tweet.source === category.type).length;
+		let category_count = tweet_array.filter(tweet => tweet.source === category.type).length;
 
 		document.querySelector('.' + category.countClass).innerText = category_count;
 
@@ -67,15 +67,15 @@ function displayTweetCategories(tweet_array, tweet_count) {
 }
 
 function displayUserWrittenTweets(tweet_array) {
-	completed_event_tweet_array = tweet_array.filter(tweet => tweet.source === 'completed_event');
+	let completed_event_tweet_array = tweet_array.filter(tweet => tweet.source === 'completed_event');
 
-	completed_event_user_written_test_array = completed_event_tweet_array.filter(
+	let completed_event_user_written_test_array = completed_event_tweet_array.filter(
 		tweet => tweet.written);
 
-	completed_event_tweet_array_length = completed_event_tweet_array.length;
+	let completed_event_tweet_array_length = completed_event_tweet_array.length;
 	document.querySelectorAll('.completedEvents')[1].innerText = completed_event_tweet_array_length;
 
-	completed_event_user_written_test_array_length = completed_event_user_written_test_array.length
+	let completed_event_user_written_test_array_length = completed_event_user_written_test_array.length
 	document.querySelector('.written').innerText = completed_event_user_written_test_array_length;
 
 	document.querySelector('.writtenPct').innerText =

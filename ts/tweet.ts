@@ -44,16 +44,64 @@ class Tweet {
         if (this.source != 'completed_event') {
             return "unknown";
         }
-        //TODO: parse the activity type from the text of the tweet
-        return "";
+
+        let text = this.text.toLowerCase();
+        
+        switch (true){
+            case text.includes('run '):
+                return 'run';
+
+            case text.includes('walk '):
+                return 'walk';
+
+            case text.includes('bike '):
+                return 'bike';
+
+            case text.includes('hike '):
+                return 'hike';
+            
+            case text.includes('swim '):
+                return 'swim '
+            
+            case text.includes('elliptical '):
+                return 'elliptical';
+            
+            case text.includes('yoga '):
+                return 'yoga';
+            
+            case text.includes('meditation '):
+                return 'meditation'
+        }
+            
+        return "unknown";
     }
 
     get distance():number {
         if(this.source != 'completed_event') {
             return 0;
         }
-        //TODO: prase the distance from the text of the tweet
-        return 0;
+
+        let start = this.text.search(/[0-9]/);
+        if (start == -1) {
+            return 0;
+        }
+
+        let end = start;
+        while (end < this.text.length &&
+            (this.text[end] >= '0' && this.text[end] <= '9' || this.text[end] == '.')) {
+            end++;
+        }
+
+        let value = Number(this.text.substring(start, end));
+        let text = this.text.toLowerCase();
+
+        if (text.includes('km') ||
+            text.includes('kilometer') ||
+            text.indexOf('kilometre') ) {
+            return value / 1.609;
+        }
+
+        return value;
     }
 
     getHTMLTableRow(rowNumber:number):string {
