@@ -61,16 +61,13 @@ class Tweet {
                 return 'hike';
             
             case text.includes('swim '):
-                return 'swim '
+                return 'swim';
             
             case text.includes('elliptical '):
-                return 'elliptical';
-            
-            case text.includes('yoga '):
-                return 'yoga';
-            
-            case text.includes('meditation '):
-                return 'meditation'
+                return 'elliptical';    
+
+            case text.includes('skate '):
+                return 'skate';
         }
             
         return "unknown";
